@@ -1,0 +1,5 @@
+1. Instal java 11 or later;
+2. Clone this repository In cmd:
+3. Navigate to project directory
+4.Write in console:
+"C:\Program Files\Java\jdk-11.0.11\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.4\lib\idea_rt.jar=61994:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.4\bin" -Dfile.encoding=UTF-8 -classpath C:\Users\Acer\IdeaProjects\SnackVedingMachine\out\production\SnackVedingMachine com.intelliarts.Main

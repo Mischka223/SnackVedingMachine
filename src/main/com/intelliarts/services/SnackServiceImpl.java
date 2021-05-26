@@ -1,7 +1,6 @@
 package com.intelliarts.services;
 
 
-
 import com.intelliarts.dao.OrderDao;
 import com.intelliarts.dao.OrderDaoInMemoryImpl;
 import com.intelliarts.dao.StockDao;
@@ -73,7 +72,7 @@ public class SnackServiceImpl implements SnackService {
         DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("yyyy-MM").parseDefaulting(ChronoField.DAY_OF_MONTH, 1).toFormatter();
         LocalDate startDate = LocalDate.parse(s, formatter);
         LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
-        countTotalPrice(orderDao.getOrdersByDates(startDate,endDate));
+        countTotalPrice(orderDao.getOrdersByDates(startDate, endDate));
     }
 
     @Override
@@ -84,7 +83,7 @@ public class SnackServiceImpl implements SnackService {
 
     @Override
     public void updateSnack(String snackName, int snackNumber) {
-        stockDao.increaseStock(snackName,snackNumber);
+        stockDao.increaseStock(snackName, snackNumber);
     }
 
     @Override
@@ -98,15 +97,13 @@ public class SnackServiceImpl implements SnackService {
     }
 
     public void countTotalPrice(List<Order> snackList) {
-
         Map<String, List<Order>> byDate = snackList.stream()
                 .collect(Collectors.groupingBy(order -> order.getSnack().getName()));
         byDate.forEach((name, orders) -> {
             double price = orders.iterator().next().getSnack().getPrice();
             int count = orders.size();
-            double totalPrice = price * count;
-            System.out.println(String.format("%s %,.2f %d",name,price,count));
-            System.out.println(">Total" + " " + totalPrice);
+            System.out.println(String.format("%s %,.2f %d", name, price, count));
         });
+
     }
 }

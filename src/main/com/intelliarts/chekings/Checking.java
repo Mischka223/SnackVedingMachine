@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Checking {
-   private final SnackService service = new SnackServiceImpl();
+    private final SnackService service = new SnackServiceImpl();
 
 
     public void methodCheck(String consoleLine) {
@@ -67,11 +67,11 @@ public class Checking {
         return Double.parseDouble(array[length - 2]);
     }
 
-    public void addCategory(String[] array){
-            String name = getSnackName(array);
-            double price = getSnackPrice(array);
-            int number = getSnackNumber(array);
-            service.addCategory(name,price,number);
+    public void addCategory(String[] array) {
+        String name = getSnackName(array);
+        double price = getSnackPrice(array);
+        int number = getSnackNumber(array);
+        service.addCategory(name, price, number);
     }
 
     public void addItem(String[] array) {

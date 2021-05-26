@@ -4,14 +4,15 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Order {
-private Snack snack;
-private LocalDate localDate;
+    private Snack snack;
+    private LocalDate localDate;
 
 
     public Order(Snack snack, LocalDate localDate) {
         this.snack = snack;
         this.localDate = localDate;
     }
+
     public Snack getSnack() {
         return snack;
     }

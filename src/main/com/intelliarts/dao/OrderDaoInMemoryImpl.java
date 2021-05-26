@@ -1,7 +1,6 @@
 package com.intelliarts.dao;
 
 
-
 import com.intelliarts.model.Order;
 
 import java.time.LocalDate;
@@ -16,12 +15,14 @@ public class OrderDaoInMemoryImpl implements OrderDao {
     public void createOrder(Order order) {
         orderList.add(order);
     }
+
     @Override
-    public List<Order> getOrdersByDate(LocalDate localDate){
+    public List<Order> getOrdersByDate(LocalDate localDate) {
         return orderList.stream().filter(snack -> snack.getLocalDate().equals(localDate)).collect(Collectors.toList());
     }
+
     @Override
-    public List<Order> getOrdersByDates(LocalDate startDate,LocalDate endDate){
+    public List<Order> getOrdersByDates(LocalDate startDate, LocalDate endDate) {
         return orderList.stream()
                 .filter(snack -> snack.getLocalDate().isBefore(endDate) || snack.getLocalDate().equals(endDate))
                 .filter(snack -> snack.getLocalDate().isAfter(startDate) || snack.getLocalDate().equals(startDate))

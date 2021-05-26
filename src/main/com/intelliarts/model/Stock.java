@@ -2,7 +2,7 @@ package com.intelliarts.model;
 
 import java.util.Objects;
 
-public class Stock implements Cloneable{
+public class Stock implements Cloneable {
     private Snack snack;
     private int count;
 
@@ -29,13 +29,14 @@ public class Stock implements Cloneable{
     }
 
     @Override
-    public Stock clone() { try {
-        return (Stock) super.clone();
-    } catch (CloneNotSupportedException e) {
-        e.getStackTrace();
-    }
+    public Stock clone() {
+        try {
+            return (Stock) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.getStackTrace();
+        }
         return null;
-}
+    }
 
     @Override
     public boolean equals(Object o) {

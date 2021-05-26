@@ -2,7 +2,7 @@ package com.intelliarts.model;
 
 import java.util.Objects;
 
-public class Snack implements Cloneable{
+public class Snack implements Cloneable {
     private String name;
     private double price;
 
@@ -21,8 +21,6 @@ public class Snack implements Cloneable{
     public void setPrice(double price) {
         this.price = price;
     }
-
-
 
 
     public Snack(String name) {
@@ -46,7 +44,7 @@ public class Snack implements Cloneable{
     }
 
     @Override
-    public Snack clone(){
+    public Snack clone() {
         try {
             return (Snack) super.clone();
         } catch (CloneNotSupportedException e) {

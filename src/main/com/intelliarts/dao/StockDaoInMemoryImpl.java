@@ -1,7 +1,6 @@
 package com.intelliarts.dao;
 
 
-
 import com.intelliarts.model.Stock;
 
 import java.util.LinkedList;
@@ -25,8 +24,9 @@ public class StockDaoInMemoryImpl implements StockDao {
         stock1.setCount(stock1.getCount() + count);
         System.out.println(String.format("%s %,.2f %d", stock1.getSnack().getName(), stock1.getSnack().getPrice(), stock1.getCount()));
     }
+
     @Override
-    public void reduceStock(String name, int count){
+    public void reduceStock(String name, int count) {
         Stock stock1 = stockList.stream().filter(s -> s.getSnack().getName().equals(name)).findAny().orElseThrow(NullPointerException::new);
         stock1.setCount(stock1.getCount() - count);
     }

@@ -14,9 +14,18 @@ public class Checking {
 
 
     public void methodCheck(String consoleLine) {
+        if(consoleLine.matches("\\b\\w{6} \\d{4}-\\d{2}-\\d{2}")
+                || consoleLine.matches("\\b\\w{6} \\d{4}-\\d{2}")
+                || consoleLine.matches("\\b\\w{4,5}")
+                || consoleLine.matches("\\b\\w{7,11}\\s[“\"]([^\"]*)[”\"]\\s\\d{4}-\\d{2}-\\d{2}")
+                || consoleLine.matches("\\b\\w{7} [“\"]([^\"]*)[”\"]\\s\\b\\d{1,3}")
+                || consoleLine.matches("\\b\\w{11} [“\"]([^\"]*)[”\"]\\s\\b\\d{1,3}.\\b\\d{1,3}\\s\\b\\d{1,3}")
+                || consoleLine.matches("\\b\\w{11} [“\"]([^\"]*)[”\"]\\s\\b\\d{1,3}\\s\\b\\d{1,3}")){
         String[] split = consoleLine.split(" ");
         String methodName = split[0];
         secondChecking(methodName, split);
+    }
+        else System.out.println("you enter something wrong");
     }
 
     public void secondChecking(String s, String[] array) {

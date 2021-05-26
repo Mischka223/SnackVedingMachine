@@ -103,6 +103,7 @@ public class SnackServiceImpl implements SnackService {
             double price = orders.iterator().next().getSnack().getPrice();
             int count = orders.size();
             System.out.println(String.format("%s %,.2f %d", name, price, count));
+            System.out.println(">Total" + " " + count*price);
         });
 
     }

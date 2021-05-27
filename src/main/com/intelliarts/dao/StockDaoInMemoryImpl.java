@@ -1,6 +1,7 @@
 package com.intelliarts.dao;
 
 
+import com.intelliarts.exeptions.NotFoundException;
 import com.intelliarts.model.Stock;
 
 import java.util.LinkedList;
@@ -15,20 +16,31 @@ public class StockDaoInMemoryImpl implements StockDao {
         if (findByName(stock.getSnack().getName()).isEmpty()) {
             stockList.add(stock);
             System.out.println(String.format("%s %,.2f %d", stock.getSnack().getName(), stock.getSnack().getPrice(), stock.getCount()));
-        }
+        } else
+            System.out.println("this snack already exists");
     }
 
     @Override
     public void increaseStock(String name, int count) {
-        Stock stock1 = stockList.stream().filter(s -> s.getSnack().getName().equals(name)).findAny().orElseThrow(NullPointerException::new);
-        stock1.setCount(stock1.getCount() + count);
-        System.out.println(String.format("%s %,.2f %d", stock1.getSnack().getName(), stock1.getSnack().getPrice(), stock1.getCount()));
+        try {
+            Stock stock1 =stockList.stream().filter(s -> s.getSnack().getName().equals(name)).findAny().orElseThrow(NotFoundException::new);
+            stock1.setCount(stock1.getCount() + count);
+            System.out.println(String.format("%s %,.2f %d", stock1.getSnack().getName(), stock1.getSnack().getPrice(), stock1.getCount()));
+        }catch (NotFoundException e){
+            System.out.println("Exception:  " + e.toString());
+        }
+
     }
 
     @Override
     public void reduceStock(String name, int count) {
-        Stock stock1 = stockList.stream().filter(s -> s.getSnack().getName().equals(name)).findAny().orElseThrow(NullPointerException::new);
-        stock1.setCount(stock1.getCount() - count);
+        try {
+            Stock stock1 = stockList.stream().filter(s -> s.getSnack().getName().equals(name)).findAny().orElseThrow(NotFoundException::new);
+            stock1.setCount(stock1.getCount() - count);
+        }catch (NotFoundException e){
+            System.out.println("Exception e" + e.toString());
+        }
+
     }
 
     @Override

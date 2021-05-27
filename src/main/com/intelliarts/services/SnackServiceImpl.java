@@ -1,12 +1,9 @@
 package com.intelliarts.services;
 
-
 import com.intelliarts.dao.OrderDao;
 import com.intelliarts.dao.OrderDaoInMemoryImpl;
 import com.intelliarts.dao.StockDao;
 import com.intelliarts.dao.StockDaoInMemoryImpl;
-import com.intelliarts.exeptions.NotFoundException;
-import com.intelliarts.exeptions.OutOfOrderException;
 import com.intelliarts.model.Order;
 import com.intelliarts.model.Snack;
 import com.intelliarts.model.Stock;
@@ -55,16 +52,15 @@ public class SnackServiceImpl implements SnackService {
         Optional<Stock> stockOptional = stockDao.findByName(name);
         if (stockOptional.isPresent()) {
             if (stockOptional.get().getCount() < 1) {
-                throw new OutOfOrderException();
+                System.out.println("this snack already be over");
+                stockDao.getAll();
             }
             stockDao.reduceStock(name, 1);
             System.out.println(localDate);
             System.out.println(stockOptional.get().getSnack().getName() + " " + stockOptional.get().getSnack().getPrice());
             orderDao.createOrder(new Order(stockOptional.get().getSnack(), localDate));
-        } else {
-            throw new NotFoundException();
         }
-
+        else System.out.println("this snack is not exist");
     }
 
     @Override
@@ -96,15 +92,19 @@ public class SnackServiceImpl implements SnackService {
         stockDao.getAll();
     }
 
-    public void countTotalPrice(List<Order> snackList) {
-        Map<String, List<Order>> byDate = snackList.stream()
+    double total = 0;
+
+    public void countTotalPrice(List<Order> orderList) {
+        Map<String, List<Order>> byDate = orderList.stream()
                 .collect(Collectors.groupingBy(order -> order.getSnack().getName()));
         byDate.forEach((name, orders) -> {
             double price = orders.iterator().next().getSnack().getPrice();
             int count = orders.size();
+            total += count * price;
+            price = price * count;
             System.out.println(String.format("%s %,.2f %d", name, price, count));
-            System.out.println(">Total" + " " + count*price);
-        });
 
+        });
+        System.out.println(">Total " + total);
     }
 }

@@ -1,5 +1,7 @@
 package com.intelliarts.exeptions;
 
-public class NotFoundException extends RuntimeException{
-
+public class NotFoundException extends NullPointerException {
+    public String toString(){
+        return "Not found this snack";
+    }
 }
